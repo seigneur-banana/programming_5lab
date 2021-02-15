@@ -1,6 +1,5 @@
 package Commands;
 import Appliances.CommandHandler;
-
 import java.util.Map;
 
 public class Help implements Command{
@@ -23,6 +22,6 @@ public class Help implements Command{
 
     @Override
     public String getDescription() {
-        return " вывести справку по доступным командам";
+        return "вывести справку по доступным командам";
     }
 }
