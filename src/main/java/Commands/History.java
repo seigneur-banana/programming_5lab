@@ -31,7 +31,7 @@ public class History implements Command{
     }
     @Override
     public String getDescription() {
-        return "вывести последние 8 команд (без их аргументов)";
+        return " : вывести последние 8 команд (без их аргументов)";
     }
     public int getSizeQueue(){
         return queue.size();

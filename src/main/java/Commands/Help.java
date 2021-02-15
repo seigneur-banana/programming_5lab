@@ -9,7 +9,7 @@ public class Help implements Command{
             CommandHandler commandHandler = new CommandHandler();
             Map<String, Command> commands = commandHandler.getMap();
             for (Command cmd : commands.values()) {
-                System.out.println(cmd.getName() + ": " + cmd.getDescription());
+                System.out.println(cmd.getName()  + cmd.getDescription());
             }
         }
         return true;
@@ -22,6 +22,6 @@ public class Help implements Command{
 
     @Override
     public String getDescription() {
-        return "вывести справку по доступным командам";
+        return " : вывести справку по доступным командам";
     }
 }

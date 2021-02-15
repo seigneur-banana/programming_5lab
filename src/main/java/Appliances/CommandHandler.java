@@ -2,6 +2,9 @@ package Appliances;
 
 import Commands.*;
 
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.*;
 
 public class CommandHandler {
@@ -17,6 +20,10 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new Exit();
         commands.put(cmd.getName(), cmd);
+        cmd = new Save();
+        commands.put(cmd.getName(), cmd);
+        cmd = new ExecuteScript();
+        commands.put(cmd.getName(), cmd);
     }
 
     public void execute(){
@@ -25,19 +32,20 @@ public class CommandHandler {
         System.out.println("Приветствие!!! @Допиши сюда что-то хорошее@ ");
         do {
             try {
+                //read();
                 System.out.print("> ");
                 String str = scanner.nextLine();
                 ParsedCommand pc = new ParsedCommand(str);
-                if (pc.command == null || "".equals(pc.command)) {
+                if (pc.getCommand() == null || "".equals(pc.getCommand())) {
                     continue;
                 }
-                Command cmd = commands.get(pc.command.toLowerCase());
+                Command cmd = commands.get(pc.getCommand().toLowerCase());
 
                 if (cmd == null) {
-                    System.out.println(ERR_MSG);
+                    System.out.println(ERR_MSG + " in comHand IF");
                     continue;
                 }
-                result = cmd.execute(pc.args);
+                result = cmd.execute(pc.getArgs());
 
                 History history = (History) commands.get("history");
                 history.addQueue(str);
@@ -47,28 +55,37 @@ public class CommandHandler {
                 }
                 catch (Exception e){
                     e.printStackTrace();
-                    System.out.println(ERR_MSG);
+                    System.out.println(ERR_MSG + " in comHand catch");
                 }
         } while (result);
+    }
+
+    public void read() throws IOException {
+        FileInputStream fileInputStream = new FileInputStream("D:\\AA_ITMO\\prog\\fifth_lab\\in.txt");
+
+        try {
+            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream, 200);
+            int i;
+            StringBuilder s = new StringBuilder();
+            while ((i = bufferedInputStream.read()) != -1) {
+                s.append((char) i);
+                if((char)i == '\n'){
+                    String[] columns = s.toString().split(",");
+                    System.out.println(s);
+                    s.setLength(0);
+                }
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
     public Map getMap(){
         return commands;
     }
-
-    class ParsedCommand {
-        String command;
-        String[] args;
-
-        public ParsedCommand(String line) {
-            String parts[] = line.split(" ");
-            if (parts != null) {
-                command = parts[0];
-                if (parts.length > 1) {
-                    args = new String[parts.length - 1];
-                    System.arraycopy(parts, 1, args, 0, args.length);
-                }
-            }
-        }
+    public String getErrMsg(){
+        return ERR_MSG;
     }
+
 }
