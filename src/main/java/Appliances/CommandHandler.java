@@ -44,11 +44,11 @@ public class CommandHandler {
                 if(history.getSizeQueue() == 9){
                     history.removeQueue();
                 }
-            }
-            catch (Exception e){
-                e.printStackTrace();
-                System.out.println(ERR_MSG);
-            }
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                    System.out.println(ERR_MSG);
+                }
         } while (result);
     }
 
