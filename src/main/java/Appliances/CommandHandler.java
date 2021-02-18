@@ -14,7 +14,7 @@ public class CommandHandler {
     private Map<Double, Location> locations;
     private Map<Double, Coordinates> coordinates;
     private Map<String, Person> persons;
-    private LinkedHashSet<StudyGroup> groups;
+    private Set<StudyGroup> groups; //ListHashSet
 
     public CommandHandler(){
         commands = new HashMap<>();
@@ -28,17 +28,19 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new ExecuteScript();
         commands.put(cmd.getName(), cmd);
+        cmd = new Add();
+        commands.put(cmd.getName(), cmd);
     }
 
     public void execute(){
         Scanner scanner = new Scanner(System.in);
-        boolean result = true;
         System.out.println("Приветствие!!! @Допиши сюда что-то хорошее@ ");
         do {
             try {
                 //read();
                 System.out.print("> ");
                 String str = scanner.nextLine();
+
                 ParsedCommand pc = new ParsedCommand(str);
                 if (pc.getCommand() == null || "".equals(pc.getCommand())) {
                     continue;
@@ -49,7 +51,9 @@ public class CommandHandler {
                     System.out.println(ERR_MSG + " in comHand IF");
                     continue;
                 }
-                result = cmd.execute(pc.getArgs());
+                if (!cmd.execute(pc.getArgs())){
+                    System.out.println("Команда не выполнена, неверный аргумент(ы)");
+                }
 
                 History history = (History) commands.get("history");
                 history.addQueue(str);
@@ -61,7 +65,7 @@ public class CommandHandler {
                     e.printStackTrace();
                     System.out.println(ERR_MSG + " in comHand catch");
                 }
-        } while (result);
+        } while (true);
     }
 
     public void read() throws IOException {

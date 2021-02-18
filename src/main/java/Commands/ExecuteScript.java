@@ -14,7 +14,7 @@ public class ExecuteScript implements Command{
     @Override
     public boolean execute(String... args) {
         boolean result = true;
-        if (args[0] != null) {
+        if (args.length == 1) {
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(args[0]));
                 String line;
@@ -37,8 +37,9 @@ public class ExecuteScript implements Command{
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
-        return result;
+            return result;
+        }else return false;
+
     }
 
     @Override
