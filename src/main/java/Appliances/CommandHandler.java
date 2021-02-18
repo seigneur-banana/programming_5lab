@@ -11,6 +11,10 @@ public class CommandHandler {
     private static final String ERR_MSG = "Command not found";
 
     private Map<String, Command> commands;
+    private Map<Double, Location> locations;
+    private Map<Double, Coordinates> coordinates;
+    private Map<String, Person> persons;
+    private LinkedHashSet<StudyGroup> groups;
 
     public CommandHandler(){
         commands = new HashMap<>();
