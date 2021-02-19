@@ -1,10 +1,15 @@
 package Commands;
 
+import Appliances.CommandHandler;
+
 public class Exit implements Command {
     @Override
-    public boolean execute(String... args) {
+    public boolean execute(CommandHandler commandHandler, String... args) {
         if (args == null) {
             System.out.println("До скорых встреч! ;)");
+            System.out.println("Coordinates: " + commandHandler.getCoordinates());
+            System.out.println("Locations: " + commandHandler.getLocations());
+            System.out.println("Persons: " + commandHandler.getPersons());
             System.exit(0);
         }
         return true;

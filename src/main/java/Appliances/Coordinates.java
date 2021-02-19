@@ -4,8 +4,16 @@ public class Coordinates {
     private double x;
     private Double y; //Значение поля должно быть больше -748, Поле не может быть null
 
+    Coordinates(Double y, double x){
+        this.y = y;
+        this.x = x;
+    }
 
-    public double getX() {
+    @Override
+    public String toString() {
+        return " (X="+x+"; Y="+y +")";
+    }
+    /*public double getX() {
         return x;
     }
     public void setX(double x) {
@@ -18,5 +26,5 @@ public class Coordinates {
     }
     public void setY(Double y) {
         this.y = y;
-    }
+    }*/
 }

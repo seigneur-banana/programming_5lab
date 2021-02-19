@@ -10,14 +10,19 @@ import java.util.*;
 public class CommandHandler {
     private static final String ERR_MSG = "Command not found";
 
+    private Queue<String> history;
     private Map<String, Command> commands;
-    private Map<Double, Location> locations;
-    private Map<Double, Coordinates> coordinates;
-    private Map<String, Person> persons;
+    private Map<Integer, Location> locations;
+    private Map<Integer, Coordinates> coordinates;
+    private Map<Integer, Person> persons;
     private Set<StudyGroup> groups; //ListHashSet
 
     public CommandHandler(){
+        history = new LinkedList<>();
         commands = new HashMap<>();
+        coordinates = new HashMap<>();
+        locations = new HashMap<>();
+        persons = new HashMap<>();
         Command cmd = new History();
         commands.put(cmd.getName(), cmd);
         cmd = new Help();
@@ -37,29 +42,28 @@ public class CommandHandler {
         System.out.println("Приветствие!!! @Допиши сюда что-то хорошее@ ");
         do {
             try {
-                //read();
-                System.out.print("> ");
-                String str = scanner.nextLine();
+                    //read();
+                    System.out.print("> ");
+                    String str = scanner.nextLine();
 
-                ParsedCommand pc = new ParsedCommand(str);
-                if (pc.getCommand() == null || "".equals(pc.getCommand())) {
-                    continue;
-                }
-                Command cmd = commands.get(pc.getCommand().toLowerCase());
+                    ParsedCommand pc = new ParsedCommand(str);
+                    if (pc.getCommand() == null || "".equals(pc.getCommand())) {
+                        continue;
+                    }
+                    Command cmd = commands.get(pc.getCommand().toLowerCase());
 
-                if (cmd == null) {
-                    System.out.println(ERR_MSG + " in comHand IF");
-                    continue;
-                }
-                if (!cmd.execute(pc.getArgs())){
-                    System.out.println("Команда не выполнена, неверный аргумент(ы)");
-                }
+                    if (cmd == null) {
+                        System.out.println(ERR_MSG + " in comHand IF");
+                        continue;
+                    }
+                    if (!cmd.execute( get(), pc.getArgs())){
+                        System.out.println("Команда не выполнена, неверный аргумент(ы)");
+                    }
 
-                History history = (History) commands.get("history");
-                history.addQueue(str);
-                if(history.getSizeQueue() == 9){
-                    history.removeQueue();
-                }
+                    history.add(str);
+                    if(history.size() == 9){
+                        history.remove();
+                    }
                 }
                 catch (Exception e){
                     e.printStackTrace();
@@ -89,11 +93,44 @@ public class CommandHandler {
         }
     }
 
-    public Map getMap(){
+    public Map<String, Command> getCommands(){
         return commands;
+    }
+    public Queue<String> getHistory(){
+        return history;
+    }
+    public Map<Integer, Location> getLocations(){
+        return locations;
+    }
+    public Map<Integer, Coordinates> getCoordinates(){
+        return coordinates;
+    }
+    public Map getPersons(){
+        return persons;
+    }
+    private Set getGroups(){
+        return groups;
     }
     public String getErrMsg(){
         return ERR_MSG;
+    }
+    private CommandHandler get(){
+        return this;
+    }
+    public void setLocations(Integer y, Float x, String name){
+        Location tmp = new Location(y,x,name);
+        locations.put(locations.size(), tmp);
+    }
+    public void setPersons(String name, int height, Color eyeColor, Color hairColor, Country nationality, Location location){
+        Person tmp = new Person(name, height, eyeColor, hairColor, nationality, location);
+        persons.put(persons.size(), tmp);
+    }
+    public void setCoordinates(Double y, double x){
+        Coordinates tmp = new Coordinates(x, y);
+        coordinates.put(coordinates.size(), tmp);
+    }
+    public void setGroups(Set groups1){
+        this.groups = groups1;
     }
 
 }

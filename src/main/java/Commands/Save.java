@@ -1,12 +1,14 @@
 package Commands;
 
+import Appliances.CommandHandler;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
 public class Save implements Command{
     @Override
-    public boolean execute(String... args) {
+    public boolean execute(CommandHandler commandHandler, String... args) {
         if (args == null) {
             String text = "123\nПроверка связи\nИ не только\nАоавпвжльы";
             try(FileOutputStream fos=new FileOutputStream("out.txt");

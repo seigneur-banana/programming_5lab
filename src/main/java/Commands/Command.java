@@ -1,7 +1,8 @@
 package Commands;
+import Appliances.CommandHandler;
 
 public interface Command {
-    boolean execute(String... args);
+    boolean execute(CommandHandler commandHandler, String... args);
     String getName();
     String getDescription();
 }

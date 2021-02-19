@@ -4,15 +4,15 @@ import java.util.Map;
 
 public class Help implements Command{
     @Override
-    public boolean execute(String... args) {
+    public boolean execute(CommandHandler commandHandler, String... args) {
         if (args == null) {
-            CommandHandler commandHandler = new CommandHandler();
-            Map<String, Command> commands = commandHandler.getMap();
+            Map<String, Command> commands = commandHandler.getCommands();
             for (Command cmd : commands.values()) {
                 System.out.println(cmd.getName()  + cmd.getDescription());
             }
+            return true;
         }
-        return true;
+        else return false;
     }
 
     @Override
