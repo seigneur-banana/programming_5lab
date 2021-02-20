@@ -45,9 +45,4 @@ public enum Color {
         }
         return color;
     }
-
-    /*@Override
-    public String toString() {
-        return this.name();
-    }*/
 }

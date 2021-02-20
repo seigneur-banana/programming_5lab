@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ExecuteScript implements Command{
     @Override
-    public boolean execute(CommandHandler commandHandler, String... args) {
+    public boolean execute(CommandHandler commandHandler, String... args) { //пофиксить рекурсию
         boolean result = true;
         if (args.length == 1) {
             try {
@@ -27,12 +27,13 @@ public class ExecuteScript implements Command{
                         System.out.println(commandHandler.getErrMsg() + " in executeScript");
                         continue;
                     }
-                    result = cmd.execute(commandHandler, pc.getArgs());
+                    if(cmd.getName().toLowerCase().equals("execute_script") && pc.getArgs()[0].toLowerCase().equals(args[0].toLowerCase())){
+                        System.out.println("Скрипт вызывает сам себя, Удалите в файле эту строчку :)");
+                    }
+                    else result = cmd.execute(commandHandler, pc.getArgs());
 
                 }while (line != null);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return result;

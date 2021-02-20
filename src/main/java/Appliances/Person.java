@@ -26,4 +26,8 @@ public class Person {
                 " nationality: "+nationality+
                 " location: "+location.toString() +")\n";
     }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -23,6 +23,8 @@ public class CommandHandler {
         coordinates = new HashMap<>();
         locations = new HashMap<>();
         persons = new HashMap<>();
+        groups = new LinkedHashSet<>();
+
         Command cmd = new History();
         commands.put(cmd.getName(), cmd);
         cmd = new Help();
@@ -105,10 +107,10 @@ public class CommandHandler {
     public Map<Integer, Coordinates> getCoordinates(){
         return coordinates;
     }
-    public Map getPersons(){
+    public Map<Integer, Person> getPersons(){
         return persons;
     }
-    private Set getGroups(){
+    public Set<StudyGroup> getGroups(){
         return groups;
     }
     public String getErrMsg(){
@@ -129,8 +131,9 @@ public class CommandHandler {
         Coordinates tmp = new Coordinates(x, y);
         coordinates.put(coordinates.size(), tmp);
     }
-    public void setGroups(Set groups1){
-        this.groups = groups1;
+    public void setGroups(Integer id, String name, Coordinates coordinates, int count, int transfer, int mark, Semester sem, Person admin){
+        StudyGroup tmp = new StudyGroup(id, name, coordinates, new Date(), count, transfer, mark, sem, admin);
+        groups.add(tmp);
     }
 
 }
