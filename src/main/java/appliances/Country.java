@@ -1,6 +1,4 @@
-package Appliances;
-
-import java.awt.*;
+package appliances;
 
 public enum Country {
     FRANCE(1),

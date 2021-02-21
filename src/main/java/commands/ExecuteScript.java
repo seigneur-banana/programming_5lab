@@ -1,12 +1,10 @@
-package Commands;
+package commands;
 
-import Appliances.CommandHandler;
-import Appliances.ParsedCommand;
+import appliances.CommandHandler;
+import appliances.ParsedCommand;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.Map;
 
 public class ExecuteScript implements Command{

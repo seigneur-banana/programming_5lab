@@ -1,4 +1,4 @@
-package Appliances;
+package appliances;
 
 public class ParsedCommand {
     private String command;

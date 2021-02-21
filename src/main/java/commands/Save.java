@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Appliances.CommandHandler;
+import appliances.CommandHandler;
 
 import java.io.FileOutputStream;
 import java.io.IOException;

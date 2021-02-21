@@ -1,4 +1,4 @@
-package Appliances;
+package appliances;
 
 public class Person {
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -24,7 +24,7 @@ public class Person {
                 " eyeColor: "+eyeColor+
                 " hairColor: "+hairColor+
                 " nationality: "+nationality+
-                " location: "+location.toString() +")\n";
+                " location: "+location +")\n";
     }
 
     public String getName() {

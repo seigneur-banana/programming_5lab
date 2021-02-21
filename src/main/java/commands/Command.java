@@ -1,5 +1,5 @@
-package Commands;
-import Appliances.CommandHandler;
+package commands;
+import appliances.CommandHandler;
 
 public interface Command {
     boolean execute(CommandHandler commandHandler, String... args);

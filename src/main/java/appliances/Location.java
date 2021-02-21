@@ -1,4 +1,4 @@
-package Appliances;
+package appliances;
 
 public class Location {
     private Float x; //Поле не может быть null

@@ -1,6 +1,6 @@
-package Appliances;
+package appliances;
 
-import Commands.*;
+import commands.*;
 
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -16,6 +16,7 @@ public class CommandHandler {
     private Map<Integer, Coordinates> coordinates;
     private Map<Integer, Person> persons;
     private Set<StudyGroup> groups; //ListHashSet
+    private Date time;
 
     public CommandHandler(){
         history = new LinkedList<>();
@@ -24,6 +25,7 @@ public class CommandHandler {
         locations = new HashMap<>();
         persons = new HashMap<>();
         groups = new LinkedHashSet<>();
+        time = new Date();
 
         Command cmd = new History();
         commands.put(cmd.getName(), cmd);
@@ -36,6 +38,10 @@ public class CommandHandler {
         cmd = new ExecuteScript();
         commands.put(cmd.getName(), cmd);
         cmd = new Add();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Info();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Show();
         commands.put(cmd.getName(), cmd);
     }
 
@@ -58,7 +64,7 @@ public class CommandHandler {
                         System.out.println(ERR_MSG + " in comHand IF");
                         continue;
                     }
-                    if (!cmd.execute( get(), pc.getArgs())){
+                    if (!cmd.execute( this, pc.getArgs())){
                         System.out.println("Команда не выполнена, неверный аргумент(ы)");
                     }
 
@@ -116,9 +122,11 @@ public class CommandHandler {
     public String getErrMsg(){
         return ERR_MSG;
     }
-    private CommandHandler get(){
-        return this;
+
+    public Date getTime() {
+        return time;
     }
+
     public void setLocations(Integer y, Float x, String name){
         Location tmp = new Location(y,x,name);
         locations.put(locations.size(), tmp);

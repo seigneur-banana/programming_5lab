@@ -1,4 +1,4 @@
-package Appliances;
+package appliances;
 
 public enum Semester {
     FIRST(1),

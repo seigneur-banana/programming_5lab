@@ -1,5 +1,5 @@
-package Commands;
-import Appliances.CommandHandler;
+package commands;
+import appliances.CommandHandler;
 import java.util.Map;
 
 public class Help implements Command{

@@ -1,4 +1,4 @@
-package Appliances;
+package appliances;
 
 public enum Color {
     GREEN(1),

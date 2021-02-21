@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Appliances.CommandHandler;
+import appliances.CommandHandler;
 
 public class Exit implements Command {
     @Override

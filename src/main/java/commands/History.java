@@ -1,5 +1,5 @@
-package Commands;
-import Appliances.CommandHandler;
+package commands;
+import appliances.CommandHandler;
 
 public class History implements Command{
 

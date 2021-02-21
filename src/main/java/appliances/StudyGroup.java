@@ -1,4 +1,4 @@
-package Appliances;
+package appliances;
 
 import java.util.Date;
 
@@ -12,6 +12,7 @@ public class StudyGroup {
     private int averageMark; //Значение поля должно быть больше 0
     private Semester semesterEnum; //Поле может быть null
     private Person groupAdmin; //Поле не может быть null
+    private Date collection;
 
     StudyGroup(Integer id, String name, Coordinates coordinates, Date date, int count, int transfer, int mark, Semester sem, Person admin){
         this.id = id;
@@ -29,13 +30,16 @@ public class StudyGroup {
     public String toString() {
         return  " id: "+id+
                 " name: "+name+
-                " coordinates: "+coordinates.toString()+
+                " coordinates: "+coordinates+
                 " creationDate: "+creationDate+
                 " studentsCount: "+studentsCount+
                 " transferredStudents: "+transferredStudents+
                 " averageMark: "+averageMark+
                 " semesterEnum: "+semesterEnum+
                 " groupAdmin: "+groupAdmin.getName()+"\n";
+    }
+    public Date getDate(){
+        return collection;
     }
 
 }

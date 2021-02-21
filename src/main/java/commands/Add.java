@@ -1,6 +1,6 @@
-package Commands;
+package commands;
 
-import Appliances.*;
+import appliances.*;
 import java.util.Scanner;
 
 public class Add implements Command {
@@ -123,15 +123,18 @@ public class Add implements Command {
                     }
                     if(idLocation != null && idLocation < commandHandler.getLocations().size() && idLocation >=0)
                         location = commandHandler.getLocations().get(idLocation);
-
                     commandHandler.setPersons(name, height, eyeColor, hairColor, nationality, location);
                 }
                 break;
 
                 case "studygroup": {
                     String name; Coordinates coordinates = null; int count = 0, transfer = 0, mark = 0; Semester sem = null; Person admin;
-                    if(commandHandler.getPersons().size()==0) System.out.print("В базе нет доступных Person для выбора админом группы," +
+
+                    if(commandHandler.getPersons().size() == 0) {
+                        System.out.println("В базе нет доступных Person для выбора админом группы," +
                             " пожалуйста, сначала добавьте Person (add Person)");
+                        break;
+                    }
                     System.out.println("Чтобы добавить элемент в StudyGroups, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Название Name (String)\n2*. id Админа (Person)\n3. id Координат (Coordinates)" +
                             "\n4. Кол-во студентов (int).\n5. Перевед-ые студенты (int)\n6. Средн.Оценка (int, знач > 0)"+
@@ -148,7 +151,9 @@ public class Add implements Command {
                         try {
                             System.out.println("Доступные Persons: " + commandHandler.getPersons());
                             System.out.print("Введите id_Person для выбора Админа группы> ");
-                            admin = commandHandler.getPersons().get(Integer.parseInt(scanner.nextLine()));
+                            int tmp = Integer.parseInt(scanner.nextLine());
+                            if(tmp >= commandHandler.getPersons().size() || tmp < 0)continue;
+                            else admin = commandHandler.getPersons().get(tmp);
                             break;
                         } catch (Exception e) {
                             System.out.println("Неверный формат ввода, пожалуйста, попробуйте снова.");
