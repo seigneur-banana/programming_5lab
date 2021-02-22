@@ -10,7 +10,15 @@ public class Add_if_max implements Command{
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if(args.length == 1){
-            int id = Integer.parseInt(args[0]);
+            int id;
+            try{
+                id = Integer.parseInt(args[0]);
+            }
+            catch (Exception e){
+                System.out.println("В качестве аргумента не Integer или <0");
+                return false;
+            }
+
             if(id < 0 ) return false;
             List<StudyGroup> list = commandHandler.sortGroups();
             Collections.sort(list);

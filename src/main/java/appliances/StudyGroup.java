@@ -44,9 +44,11 @@ public class StudyGroup implements Comparable<StudyGroup>{
     public void setId(Integer id){
         this.id = id;
     }
-
+    public void removeById(){
+        
+    }
     @Override
     public int compareTo(StudyGroup o) {
-        return this.id - o.id;
+        return this.creationDate.compareTo(o.creationDate);
     }
 }

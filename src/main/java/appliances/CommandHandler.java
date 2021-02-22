@@ -10,23 +10,15 @@ import java.util.*;
 public class CommandHandler {
     private static final String ERR_MSG = "Command not found";
 
-    private Queue<String> history;
-    private Map<String, Command> commands;
-    private Map<Integer, Location> locations;
-    private Map<Integer, Coordinates> coordinates;
-    private Map<Integer, Person> persons;
-    private Set<StudyGroup> groups; //ListHashSet
-    private Date time;
+    private Queue<String> history = new LinkedList<>();
+    private Map<String, Command> commands  = new HashMap<>();
+    private Map<Integer, Location> locations = new HashMap<>();;
+    private Map<Integer, Coordinates> coordinates = new HashMap<>();
+    private Map<Integer, Person> persons = new HashMap<>();
+    private Set<StudyGroup> groups = new LinkedHashSet<>();
+    private Date time = new Date();
 
     public CommandHandler(){
-        history = new LinkedList<>();
-        commands = new HashMap<>();
-        coordinates = new HashMap<>();
-        locations = new HashMap<>();
-        persons = new HashMap<>();
-        groups = new LinkedHashSet<>();
-        time = new Date();
-
         Command cmd = new History();
         commands.put(cmd.getName(), cmd);
         cmd = new Help();
@@ -46,6 +38,8 @@ public class CommandHandler {
         cmd = new Clear();
         commands.put(cmd.getName(), cmd);
         cmd = new Add_if_max();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Remove_by_id();
         commands.put(cmd.getName(), cmd);
     }
 
