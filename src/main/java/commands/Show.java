@@ -1,11 +1,14 @@
 package commands;
 
 import appliances.CommandHandler;
+import appliances.StudyGroup;
+import java.util.List;
 
 public class Show implements Command{
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
-        System.out.println("StudyGroups: " + commandHandler.getGroups());
+        List<StudyGroup> list = commandHandler.sortGroups();
+        System.out.println("StudyGroups: " + list);
         return true;
     }
 

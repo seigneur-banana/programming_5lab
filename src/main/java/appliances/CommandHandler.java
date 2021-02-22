@@ -43,6 +43,10 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new Show();
         commands.put(cmd.getName(), cmd);
+        cmd = new Clear();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Add_if_max();
+        commands.put(cmd.getName(), cmd);
     }
 
     public void execute(){
@@ -142,6 +146,14 @@ public class CommandHandler {
     public void setGroups(Integer id, String name, Coordinates coordinates, int count, int transfer, int mark, Semester sem, Person admin){
         StudyGroup tmp = new StudyGroup(id, name, coordinates, new Date(), count, transfer, mark, sem, admin);
         groups.add(tmp);
+    }
+    public void clearGroups(){
+        groups.clear();
+    }
+    public List<StudyGroup> sortGroups(){
+        List<StudyGroup> list = new ArrayList<>(groups);
+        Collections.sort(list);
+        return list;
     }
 
 }

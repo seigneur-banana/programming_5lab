@@ -2,7 +2,7 @@ package appliances;
 
 import java.util.Date;
 
-public class StudyGroup {
+public class StudyGroup implements Comparable<StudyGroup>{
     private Integer id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
@@ -38,8 +38,15 @@ public class StudyGroup {
                 " semesterEnum: "+semesterEnum+
                 " groupAdmin: "+groupAdmin.getName()+"\n";
     }
-    public Date getDate(){
-        return collection;
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id){
+        this.id = id;
     }
 
+    @Override
+    public int compareTo(StudyGroup o) {
+        return this.id - o.id;
+    }
 }

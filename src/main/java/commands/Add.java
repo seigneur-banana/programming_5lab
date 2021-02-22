@@ -133,7 +133,7 @@ public class Add implements Command {
                     if(commandHandler.getPersons().size() == 0) {
                         System.out.println("В базе нет доступных Person для выбора админом группы," +
                             " пожалуйста, сначала добавьте Person (add Person)");
-                        break;
+                        return false;
                     }
                     System.out.println("Чтобы добавить элемент в StudyGroups, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Название Name (String)\n2*. id Админа (Person)\n3. id Координат (Coordinates)" +
