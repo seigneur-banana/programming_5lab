@@ -27,7 +27,7 @@ public class StudyGroup implements Comparable<StudyGroup>{
     }
 
     @Override
-    public String toString() {
+    public String toString() { //ФОРМАТ ДАТЫ
         return  " id: "+id+
                 " name: "+name+
                 " coordinates: "+coordinates+

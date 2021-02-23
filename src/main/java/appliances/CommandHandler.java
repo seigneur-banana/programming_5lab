@@ -1,10 +1,6 @@
 package appliances;
 
 import commands.*;
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.*;
 
 public class CommandHandler {
@@ -51,6 +47,10 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new Update();
         commands.put(cmd.getName(), cmd);
+        IOcsv io = new IOcsv();
+        try{io.read(this);}
+        catch (Exception e){e.printStackTrace();}
+
     }
 
     public void execute(){
@@ -58,7 +58,6 @@ public class CommandHandler {
         System.out.println("Приветствие!!! @Допиши сюда что-то хорошее@ ");
         do {
             try {
-                    //read();
                     System.out.print("> ");
                     String str = scanner.nextLine();
 
@@ -86,27 +85,6 @@ public class CommandHandler {
                     System.out.println(ERR_MSG + " in comHand catch");
                 }
         } while (true);
-    }
-
-    public void read() throws IOException {
-        FileInputStream fileInputStream = new FileInputStream("D:\\AA_ITMO\\prog\\fifth_lab\\in.txt");
-
-        try {
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream, 200);
-            int i;
-            StringBuilder s = new StringBuilder();
-            while ((i = bufferedInputStream.read()) != -1) {
-                s.append((char) i);
-                if((char)i == '\n'){
-                    String[] columns = s.toString().split(",");
-                    System.out.println(s);
-                    s.setLength(0);
-                }
-            }
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
     }
 
     public Map<String, Command> getCommands(){

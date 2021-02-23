@@ -135,7 +135,7 @@ public class Add implements Command {
                             " пожалуйста, сначала добавьте Person (add Person)");
                         return false;
                     }
-                    System.out.println("Чтобы добавить элемент в StudyGroups, введите такие поля, как (Обязательные поля помечены *):" +
+                    System.out.println("StudyGroups, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Название Name (String)\n2*. id Админа (Person)\n3. id Координат (Coordinates)" +
                             "\n4. Кол-во студентов (int).\n5. Перевед-ые студенты (int)\n6. Средн.Оценка (int, знач > 0)"+
                             "\n7. Номер семестра (SemesterEnum).");
