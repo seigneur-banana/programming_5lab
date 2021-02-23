@@ -13,7 +13,6 @@ public class Update implements Command{
     public boolean execute(CommandHandler commandHandler, String... args) {
         if(args.length == 1){
             Integer id; boolean result = false;
-            Map<String, Command> commands = commandHandler.getCommands();
             List<StudyGroup> list = commandHandler.sortGroups();
             try{
                 id = Integer.parseInt(args[0]);

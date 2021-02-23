@@ -30,4 +30,19 @@ public class Person {
     public String getName() {
         return name;
     }
+    public Color getEyeColor() {
+        return eyeColor;
+    }
+    public Color getHairColor() {
+        return hairColor;
+    }
+    public int getHeight(){
+        return height;
+    }
+    public Country getCountry() {
+        return nationality;
+    }
+    public Location getLocation() {
+        return location;
+    }
 }

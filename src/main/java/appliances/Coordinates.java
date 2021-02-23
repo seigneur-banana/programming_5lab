@@ -13,18 +13,10 @@ public class Coordinates {
     public String toString() {
         return " (X="+x+"; Y="+y +")";
     }
-    /*public double getX() {
+    public double getX() {
         return x;
     }
-    public void setX(double x) {
-        this.x = x;
-    }
-
-
     public Double getY() {
         return y;
     }
-    public void setY(Double y) {
-        this.y = y;
-    }*/
 }

@@ -1,25 +1,44 @@
 package commands;
 
 import appliances.CommandHandler;
+import appliances.FileParser;
+import appliances.StudyGroup;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class Save implements Command{
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args == null) {
-            String text = "123\nПроверка связи\nИ не только\nАоавпвжльы";
-            try(FileOutputStream fos=new FileOutputStream("out.txt");
-                PrintStream printStream = new PrintStream(fos))
-            {
-                printStream.print(text);
-                System.out.println("Запись в файл произведена");
-            }
-            catch(IOException ex){
+            try (PrintWriter writer = new PrintWriter(new File("in.csv"))) {
+                StringBuilder sb = new StringBuilder();
 
-                System.out.println(ex.getMessage());
+                for (StudyGroup temp : commandHandler.getGroups()) {
+                    sb.append(temp.getName()).append(",");
+                    sb.append(temp.getCoordinates().getX()).append(",");
+                    sb.append(temp.getCoordinates().getY()).append(",");
+                    sb.append(temp.getStudentsCount()).append(",");
+                    sb.append(temp.getTransferredStudents()).append(",");
+                    sb.append(temp.getAverageMark()).append(",");
+                    sb.append(temp.getSemesterEnum()).append(",");
+                    sb.append(temp.getGroupAdmin().getName()).append(",");
+
+                    sb.append(temp.getGroupAdmin().getHeight()).append(",");
+                    sb.append(temp.getGroupAdmin().getEyeColor()).append(",");
+                    sb.append(temp.getGroupAdmin().getHairColor()).append(",");
+                    sb.append(temp.getGroupAdmin().getCountry()).append(",");
+                    sb.append(temp.getGroupAdmin().getLocation().getX()).append(",");
+                    sb.append(temp.getGroupAdmin().getLocation().getY()).append(",");
+                    sb.append(temp.getGroupAdmin().getLocation().getName());
+                }
+                writer.write(sb.toString());
+
+                System.out.println("done!");
+
+            } catch (FileNotFoundException e) {
+                System.out.println(e.getMessage());
             }
         }
         return true;

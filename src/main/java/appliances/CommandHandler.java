@@ -47,7 +47,7 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new Update();
         commands.put(cmd.getName(), cmd);
-        IOcsv io = new IOcsv();
+        FileParser io = new FileParser();
         try{io.read(this);}
         catch (Exception e){e.printStackTrace();}
 

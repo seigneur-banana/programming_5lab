@@ -9,7 +9,7 @@ public class Show implements Command{
     public boolean execute(CommandHandler commandHandler, String... args) {
         List<StudyGroup> list = commandHandler.sortGroups();
         if(list.size() == 0) System.out.println("Коллекция StudyGroups пуста :( ");
-        else System.out.println("StudyGroups: " + list);
+        else System.out.println("StudyGroups:\n" + list);
         return true;
     }
 

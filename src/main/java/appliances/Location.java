@@ -15,4 +15,14 @@ public class Location {
     public String toString() {
         return name+": (X="+x+"; Y="+y+") ";
     }
+
+    public String getName() {
+        return name;
+    }
+    public Float getX() {
+        return x;
+    }
+    public Integer getY() {
+        return y;
+    }
 }

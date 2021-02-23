@@ -1,5 +1,6 @@
 package appliances;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class StudyGroup implements Comparable<StudyGroup>{
@@ -29,14 +30,14 @@ public class StudyGroup implements Comparable<StudyGroup>{
     @Override
     public String toString() { //ФОРМАТ ДАТЫ
         return  " id: "+id+
-                " name: "+name+
-                " coordinates: "+coordinates+
-                " creationDate: "+creationDate+
-                " studentsCount: "+studentsCount+
-                " transferredStudents: "+transferredStudents+
-                " averageMark: "+averageMark+
-                " semesterEnum: "+semesterEnum+
-                " groupAdmin: "+groupAdmin.getName()+"\n";
+                "; name: "+name+
+                "; coordinates: "+coordinates+
+                "; creationDate: " + new SimpleDateFormat("dd.MM.yyyy HH:mm").format(creationDate) +
+                "; studentsCount: "+studentsCount+
+                "; transferredStudents: "+transferredStudents+
+                "; averageMark: "+averageMark+
+                "; semesterEnum: "+semesterEnum+
+                "; groupAdmin: "+groupAdmin.getName()+"\n";
     }
     public Integer getId() {
         return id;
@@ -50,6 +51,22 @@ public class StudyGroup implements Comparable<StudyGroup>{
     public String getName(){
         return name;
     }
+    public Coordinates getCoordinates() {
+        return coordinates;
+    }
+    public int getStudentsCount() {
+        return studentsCount;
+    }
+    public int getAverageMark() {
+        return averageMark;
+    }
+    public int getTransferredStudents() {
+        return transferredStudents;
+    }
+    public Person getGroupAdmin() {
+        return groupAdmin;
+    }
+
     @Override
     public int compareTo(StudyGroup o) {
         return this.creationDate.compareTo(o.creationDate);
