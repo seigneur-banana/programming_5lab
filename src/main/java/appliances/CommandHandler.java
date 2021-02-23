@@ -41,6 +41,16 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new Remove_by_id();
         commands.put(cmd.getName(), cmd);
+        cmd = new Filter_contains_name();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Print_descending();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Remove_all_by_semester_enum();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Remove_greater();
+        commands.put(cmd.getName(), cmd);
+        cmd = new Update();
+        commands.put(cmd.getName(), cmd);
     }
 
     public void execute(){

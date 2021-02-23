@@ -8,7 +8,8 @@ public class Show implements Command{
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         List<StudyGroup> list = commandHandler.sortGroups();
-        System.out.println("StudyGroups: " + list);
+        if(list.size() == 0) System.out.println("Коллекция StudyGroups пуста :( ");
+        else System.out.println("StudyGroups: " + list);
         return true;
     }
 
