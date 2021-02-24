@@ -5,20 +5,20 @@ import appliances.StudyGroup;
 
 import java.util.Iterator;
 
-public class Remove_all_by_semester_enum implements Command{
+public class Remove_all_by_semester_enum implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         boolean result = false;
-        if(args.length == 1) {
-            if (args[0] == "") return false;
-            for(Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext();){
-                if(args[0].toLowerCase().equals(iterator.next().getSemesterEnum().toString().toLowerCase())) {
+        if (args != null) {
+            if (args.length != 1 || args[0] == "") return false;
+            for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); ) {
+                if (args[0].toLowerCase().equals(iterator.next().getSemesterEnum().toString().toLowerCase())) {
                     iterator.remove();
                     result = true;
                 }
             }
             if (!result) System.out.println("Элемента с таким ID и не было :)");
-            return  true;
+            return true;
         }
 
         return false;

@@ -1,14 +1,15 @@
 package commands;
 
 import appliances.CommandHandler;
+
 import java.text.SimpleDateFormat;
 
 public class Info implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
-        System.out.print("StudyGroup\nДата инициализации "+commandHandler.getGroups().getClass()+" : ");
+        System.out.print("StudyGroup\nДата инициализации " + commandHandler.getGroups().getClass() + " : ");
         System.out.println(new SimpleDateFormat("dd.MM.yyyy k:mm").format(commandHandler.getTime()));
-        System.out.println("Кол-во элементов : "+commandHandler.getGroups().size());
+        System.out.println("Кол-во элементов : " + commandHandler.getGroups().size());
         return true;
     }
 

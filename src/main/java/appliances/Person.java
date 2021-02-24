@@ -8,7 +8,7 @@ public class Person {
     private Country nationality; //Поле может быть null
     private Location location; //Поле может быть null
 
-    Person(String name, int height, Color eye, Color hair, Country country, Location location){
+    Person(String name, int height, Color eye, Color hair, Country country, Location location) {
         this.name = name;
         this.height = height;
         this.eyeColor = eye;
@@ -19,29 +19,34 @@ public class Person {
 
     @Override
     public String toString() {
-        return  " (name: "+name+
-                " height: "+height+
-                " eyeColor: "+eyeColor+
-                " hairColor: "+hairColor+
-                " nationality: "+nationality+
-                " location: "+location +")\n";
+        return " (name: " + name +
+                " height: " + height +
+                " eyeColor: " + eyeColor +
+                " hairColor: " + hairColor +
+                " nationality: " + nationality +
+                " location: " + location + ")\n";
     }
 
     public String getName() {
         return name;
     }
+
     public Color getEyeColor() {
         return eyeColor;
     }
+
     public Color getHairColor() {
         return hairColor;
     }
-    public int getHeight(){
+
+    public int getHeight() {
         return height;
     }
+
     public Country getCountry() {
         return nationality;
     }
+
     public Location getLocation() {
         return location;
     }

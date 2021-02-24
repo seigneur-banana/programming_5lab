@@ -1,2 +1,8 @@
-help
-exit
+add {"name":"NewGroup","Y":"100.0","x":"50.0","count":"25","transfer":"8","mark":"4","sem":"SECOND","idPerson":"0"}
+show
+update 6 {"name":"NewNewGroup","Y":"100.0","x":"50.0","count":"25","transfer":"8","mark":"4","sem":"SECOND","idPerson":"0"}
+show
+remove_by_id 3
+show
+info
+history

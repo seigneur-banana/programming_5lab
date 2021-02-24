@@ -8,21 +8,20 @@ import java.util.Iterator;
 public class Filter_contains_name implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
-        if(args.length == 1){
-            if (args[0] == "") return false;
+        if (args != null) {
+            if (args.length != 1 || args[0] == "") return false;
             boolean result = false;
 
-            for(Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext();){
+            for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); ) {
                 StudyGroup temp = iterator.next();
-                if(temp.getName().toLowerCase().contains(args[0].toLowerCase())) {
+                if (temp.getName().toLowerCase().contains(args[0].toLowerCase())) {
                     System.out.println(temp);
                     result = true;
                 }
             }
             if (!result) System.out.println("Элемента с таким ID и не было :)");
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     @Override

@@ -16,7 +16,8 @@ public class ParsedCommand {
     public String getCommand() {
         return command;
     }
-    public String[] getArgs(){
+
+    public String[] getArgs() {
         return args;
     }
 }

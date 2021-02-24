@@ -2,15 +2,18 @@ package commands;
 
 import appliances.CommandHandler;
 import appliances.StudyGroup;
+
 import java.util.List;
 
-public class Show implements Command{
+public class Show implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
-        List<StudyGroup> list = commandHandler.sortGroups();
-        if(list.size() == 0) System.out.println("Коллекция StudyGroups пуста :( ");
-        else System.out.println("StudyGroups:\n" + list);
-        return true;
+        if (args == null) {
+            List<StudyGroup> list = commandHandler.sortGroups();
+            if (list.size() == 0) System.out.println("Коллекция StudyGroups пуста :( ");
+            else System.out.println("StudyGroups:\n" + list);
+            return true;
+        } else return false;
     }
 
     @Override

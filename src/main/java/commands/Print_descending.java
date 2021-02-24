@@ -9,7 +9,7 @@ import java.util.List;
 public class Print_descending implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
-        if(args == null){
+        if (args == null) {
             List<StudyGroup> list = commandHandler.sortGroups();
             Collections.sort(list, Collections.reverseOrder());
 
@@ -19,8 +19,7 @@ public class Print_descending implements Command {
             }*/
             System.out.println("Descending StudyGroup : " + list);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     @Override

@@ -1,14 +1,13 @@
 package commands;
 
 import appliances.CommandHandler;
-import appliances.FileParser;
 import appliances.StudyGroup;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
-public class Save implements Command{
+public class Save implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args == null) {

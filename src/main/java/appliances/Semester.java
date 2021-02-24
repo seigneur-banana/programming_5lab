@@ -15,6 +15,7 @@ public enum Semester {
     public int getValue() {
         return value;
     }
+
     public static Semester getSemestrById(int id) {
 
         Semester semester = null;

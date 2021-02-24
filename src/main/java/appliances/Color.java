@@ -16,6 +16,7 @@ public enum Color {
     public int getValue() {
         return value;
     }
+
     public static Color getColorById(int id) {
 
         Color color = null;

@@ -6,36 +6,56 @@ import appliances.ParsedCommand;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-public class ExecuteScript implements Command{
+public class ExecuteScript implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) { //пофиксить рекурсию
         boolean result = true;
-        if (args.length == 1) {
+        if (args != null) {
+            if (args.length != 1) return false;
             try {
                 BufferedReader reader = new BufferedReader(new FileReader(args[0]));
                 String line;
                 Map<String, Command> commands = commandHandler.getCommands();
 
-                do{
+                while (true) {
                     line = reader.readLine();
+                    if (line == null) break;
+
+                    if (line.matches("\\s*add\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
+                        Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
+                        if (m.find()) {
+                            if (Add.addFromScript(commandHandler, Add.isItIdUnique(commandHandler, commandHandler.getGroups().size()), m.group(), false))
+                                System.out.println("Элемент добавлен");
+                            continue;
+                        }
+                    }
+                    if (line.matches("\\s*update\\s+\\d\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
+                        Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
+                        if (m.find()) {
+                            String[] columns = line.split(" ");
+                            if (Add.addFromScript(commandHandler, Integer.parseInt(columns[1]), m.group(), true))
+                                System.out.println("Элемент обновлен");
+                            continue;
+                        }
+                    }
                     ParsedCommand pc = new ParsedCommand(line);
                     Command cmd = commands.get(pc.getCommand().toLowerCase());
                     if (cmd == null) {
                         System.out.println(commandHandler.getErrMsg() + " in executeScript");
                         continue;
                     }
-                    if(cmd.getName().toLowerCase().equals("execute_script") && pc.getArgs()[0].toLowerCase().equals(args[0].toLowerCase())){
+                    if (cmd.getName().toLowerCase().equals("execute_script") && pc.getArgs()[0].toLowerCase().equals(args[0].toLowerCase())) {
                         System.out.println("Скрипт вызывает сам себя, Удалите в файле эту строчку :)");
-                    }
-                    else result = cmd.execute(commandHandler, pc.getArgs());
-
-                }while (line != null);
+                    } else result = cmd.execute(commandHandler, pc.getArgs());
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
             return result;
-        }else return false;
+        } else return false;
 
     }
 

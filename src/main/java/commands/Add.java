@@ -1,6 +1,10 @@
 package commands;
 
 import appliances.*;
+import org.json.simple.parser.ParseException;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class Add implements Command {
@@ -31,10 +35,13 @@ public class Add implements Command {
                         x = 0;
                     }
                     commandHandler.setCoordinates(y, x);
-                }break;
+                }
+                break;
 
                 case "location": {
-                    Float x; Integer y; String name;
+                    Float x;
+                    Integer y;
+                    String name;
                     System.out.println("Чтобы добавить элемент в Location, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Координата X (Float)\n2*. Координата Y (Integer)\n3. Название name (String).");
                     do {
@@ -57,21 +64,24 @@ public class Add implements Command {
                     } while (true);
                     System.out.print("Введите name> ");
                     name = scanner.nextLine();
-                    if(name.equals("")) name = null;
-                    commandHandler.setLocations(y,x,name);
+                    if (name.equals("")) name = null;
+                    commandHandler.setLocations(y, x, name);
                 }
                 break;
 
                 case "person": {
-                    String name, temp; int height; Color eyeColor = null, hairColor = null;
-                    Country nationality = null; Location location = null;
+                    String name, temp;
+                    int height;
+                    Color eyeColor = null, hairColor = null;
+                    Country nationality = null;
+                    Location location = null;
                     System.out.println("Чтобы добавить элемент в Person, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Имя Name (String)\n2*. Рост height (int, знач > 0)\n3. ЦветГлаз eyeColor (Color)." +
                             "\n4. ЦветПричёски hairColor (Color).\n5. Национальность nationality (Country)\n6. Локация location (Location).");
                     do {
                         System.out.print("Введите Имя> ");
                         name = scanner.nextLine();
-                        if(!name.equals("")) break;
+                        if (!name.equals("")) break;
                         else System.out.println("Неверный формат ввода, пожалуйста, попробуйте снова.");
                     } while (true);
 
@@ -88,7 +98,7 @@ public class Add implements Command {
                     System.out.print("Введите ЦветГлаз> ");
                     temp = scanner.nextLine();
                     for (Color clr : Color.values()) {
-                        if (temp.toLowerCase().equals(clr.name().toLowerCase())){
+                        if (temp.toLowerCase().equals(clr.name().toLowerCase())) {
                             eyeColor = clr;
                             break;
                         }
@@ -97,7 +107,7 @@ public class Add implements Command {
                     System.out.print("Введите ЦветПричёски> ");
                     temp = scanner.nextLine();
                     for (Color clr : Color.values()) {
-                        if (temp.toLowerCase().equals(clr.name().toLowerCase())){
+                        if (temp.toLowerCase().equals(clr.name().toLowerCase())) {
                             hairColor = clr;
                             break;
                         }
@@ -106,7 +116,7 @@ public class Add implements Command {
                     System.out.print("Введите Национальность> ");
                     temp = scanner.nextLine();
                     for (Country cntr : Country.values()) {
-                        if (temp.toLowerCase().equals(cntr.name().toLowerCase())){
+                        if (temp.toLowerCase().equals(cntr.name().toLowerCase())) {
                             nationality = cntr;
                             break;
                         }
@@ -121,29 +131,33 @@ public class Add implements Command {
                         System.out.println("Неверный формат id Location");
                         idLocation = null;
                     }
-                    if(idLocation != null && idLocation < commandHandler.getLocations().size() && idLocation >=0)
+                    if (idLocation != null && idLocation < commandHandler.getLocations().size() && idLocation >= 0)
                         location = commandHandler.getLocations().get(idLocation);
                     commandHandler.setPersons(name, height, eyeColor, hairColor, nationality, location);
                 }
                 break;
 
                 case "studygroup": {
-                    String name; Coordinates coordinates = null; int count = 0, transfer = 0, mark = 0; Semester sem = null; Person admin;
+                    String name;
+                    Coordinates coordinates = null;
+                    int count = 0, transfer = 0, mark = 0;
+                    Semester sem = null;
+                    Person admin;
 
-                    if(commandHandler.getPersons().size() == 0) {
+                    if (commandHandler.getPersons().size() == 0) {
                         System.out.println("В базе нет доступных Person для выбора админом группы," +
-                            " пожалуйста, сначала добавьте Person (add Person)");
+                                " пожалуйста, сначала добавьте Person (add Person)");
                         return false;
                     }
                     System.out.println("StudyGroups, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Название Name (String)\n2*. id Админа (Person)\n3. id Координат (Coordinates)" +
-                            "\n4. Кол-во студентов (int).\n5. Перевед-ые студенты (int)\n6. Средн.Оценка (int, знач > 0)"+
+                            "\n4. Кол-во студентов (int).\n5. Перевед-ые студенты (int)\n6. Средн.Оценка (int, знач > 0)" +
                             "\n7. Номер семестра (SemesterEnum).");
 
                     do {
                         System.out.print("Введите Название> ");
                         name = scanner.nextLine();
-                        if(!name.equals("")) break;
+                        if (!name.equals("")) break;
                         else System.out.println("Неверный формат ввода, пожалуйста, попробуйте снова.");
                     } while (true);
 
@@ -152,7 +166,7 @@ public class Add implements Command {
                             System.out.println("Доступные Persons: " + commandHandler.getPersons());
                             System.out.print("Введите id_Person для выбора Админа группы> ");
                             int tmp = Integer.parseInt(scanner.nextLine());
-                            if(tmp >= commandHandler.getPersons().size() || tmp < 0)continue;
+                            if (tmp >= commandHandler.getPersons().size() || tmp < 0) continue;
                             else admin = commandHandler.getPersons().get(tmp);
                             break;
                         } catch (Exception e) {
@@ -164,7 +178,7 @@ public class Add implements Command {
                     System.out.print("Введите id_Координат> ");
                     try {
                         Integer idCoordinates = Integer.parseInt(scanner.nextLine());
-                        if(idCoordinates < commandHandler.getCoordinates().size() && idCoordinates >=0)
+                        if (idCoordinates < commandHandler.getCoordinates().size() && idCoordinates >= 0)
                             coordinates = commandHandler.getCoordinates().get(idCoordinates);
                     } catch (Exception e) {
                         System.out.println("Неверный формат id_Coordinates присвоен null");
@@ -173,7 +187,7 @@ public class Add implements Command {
                     System.out.print("Введите Количество студентов> ");
                     try {
                         int temp = Integer.parseInt(scanner.nextLine());
-                        if(temp >= 0) count = temp;
+                        if (temp >= 0) count = temp;
                     } catch (Exception e) {
                         System.out.println("Неверный формат, присвоен 0");
                     }
@@ -181,7 +195,7 @@ public class Add implements Command {
                     System.out.print("Введите Количество переведенных студентов> ");
                     try {
                         int temp = Integer.parseInt(scanner.nextLine());
-                        if(temp >= 0) transfer = temp;
+                        if (temp >= 0) transfer = temp;
                     } catch (Exception e) {
                         System.out.println("Неверный формат, присвоен 0");
                     }
@@ -189,7 +203,7 @@ public class Add implements Command {
                     System.out.print("Введите значение сред. оценки в группе> ");
                     try {
                         int temp = Integer.parseInt(scanner.nextLine());
-                        if(temp >= 0 && temp <= 5) mark = temp;
+                        if (temp >= 0 && temp <= 5) mark = temp;
                     } catch (Exception e) {
                         System.out.println("Неверный формат, присвоен 0");
                     }
@@ -197,13 +211,15 @@ public class Add implements Command {
                     System.out.print("Введите номер семестра> ");
                     String temp = scanner.nextLine();
                     for (Semester semester : Semester.values()) {
-                        if (temp.toLowerCase().equals(semester.name().toLowerCase())){
-                           sem = semester;
-                           break;
+                        if (temp.toLowerCase().equals(semester.name().toLowerCase())) {
+                            sem = semester;
+                            break;
                         }
                     }
-                    commandHandler.setGroups(commandHandler.getGroups().size(), name, coordinates, count, transfer, mark, sem, admin);
-                }break;
+                    commandHandler.setGroups(isItIdUnique(commandHandler, commandHandler.getGroups().size()),
+                            name, coordinates, count, transfer, mark, sem, admin);
+                }
+                break;
 
                 default: {
                     System.out.println("Аргумент не распознан, попробуйте снова :) ");
@@ -211,8 +227,9 @@ public class Add implements Command {
                 break;
             }
             return true;
+        } else {
+            return false;
         }
-        else{return false;}
     }
 
     @Override
@@ -223,5 +240,83 @@ public class Add implements Command {
     @Override
     public String getDescription() {
         return " {element} : добавить новый элемент в коллекцию";
+    }
+
+    public static int isItIdUnique(CommandHandler commandHandler, Integer id) {
+        int result = 0;
+        boolean match = false;
+        for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); ) {
+            if (id.equals(iterator.next().getId())) {
+                match = true;
+                result = id + 1;
+                int temp = isItIdUnique(commandHandler, result);
+                if (temp > 0) result = temp;
+            }
+        }
+        if (match) return result;
+        else return id;
+    }
+
+    public static boolean addFromScript(CommandHandler commandHandler, Integer idGroup, String str, boolean choice) throws ParseException {
+        if (choice) {
+            boolean match = false;
+            for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); )
+                if (idGroup.equals(iterator.next().getId())) match = true;
+            if (!match) {
+                System.out.println("Элемента с таким id не было . . .");
+                return false;
+            }
+            for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); )
+                if (idGroup.equals(iterator.next().getId()))
+                    iterator.remove();
+        }
+        ArrayList<String> ar = FileParser.parseJSON(str);
+        Double corY = 0.0, corX = 0.0;
+        int count = 0, transfer = 0, mark = 0, id = 0;
+        Semester sem = null;
+        String name = ar.get(0);
+        try {
+            corY = Double.parseDouble(ar.get(1));
+        } catch (Exception e) {
+        }
+        try {
+            corX = Double.parseDouble(ar.get(2));
+        } catch (Exception e) {
+        }
+        try {
+            if (Integer.parseInt(ar.get(3)) > 0) count = Integer.parseInt(ar.get(3));
+        } catch (Exception e) {
+        }
+        try {
+            if (Integer.parseInt(ar.get(4)) > 0) transfer = Integer.parseInt(ar.get(4));
+        } catch (Exception e) {
+        }
+        try {
+            if (Integer.parseInt(ar.get(5)) > 0 && Integer.parseInt(ar.get(5)) <= 5)
+                mark = Integer.parseInt(ar.get(5));
+        } catch (Exception e) {
+        }
+        for (Semester semester : Semester.values()) {
+            if (ar.get(6).toLowerCase().equals(semester.name().toLowerCase())) {
+                sem = semester;
+                break;
+            }
+        }
+        try {
+            if (Integer.parseInt(ar.get(7)) > 0) id = Integer.parseInt(ar.get(7));
+        } catch (Exception e) {
+        }
+        commandHandler.setCoordinates(corY, corX);
+        commandHandler.setGroups(
+                idGroup,                                                                        //id group
+                name,                                                                           //name group
+                commandHandler.getCoordinates().get(commandHandler.getCoordinates().size() - 1),//coordinates
+                count,
+                transfer,
+                mark,
+                sem,
+                commandHandler.getPersons().get(id)                                             //admin
+        );
+        return true;
     }
 }
