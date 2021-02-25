@@ -1,6 +1,7 @@
 package appliances;
 
 import java.text.SimpleDateFormat;
+import java.util.Comparator;
 import java.util.Date;
 
 public class StudyGroup implements Comparable<StudyGroup> {
@@ -48,6 +49,10 @@ public class StudyGroup implements Comparable<StudyGroup> {
         this.id = id;
     }
 
+    public void setCount(Integer count) {
+        this.studentsCount = count;
+    }
+
     public Semester getSemesterEnum() {
         return semesterEnum;
     }
@@ -78,6 +83,14 @@ public class StudyGroup implements Comparable<StudyGroup> {
 
     @Override
     public int compareTo(StudyGroup o) {
-        return this.creationDate.compareTo(o.creationDate);
+        return this.studentsCount - o.studentsCount;
+    }
+
+    public static class DateComparator implements Comparator<StudyGroup> {
+
+        @Override
+        public int compare(StudyGroup o1, StudyGroup o2) {
+            return o1.creationDate.compareTo(o2.creationDate);
+        }
     }
 }

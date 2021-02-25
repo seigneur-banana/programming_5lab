@@ -19,7 +19,7 @@ public class Filter_contains_name implements Command {
                     result = true;
                 }
             }
-            if (!result) System.out.println("Элемента с таким ID и не было :)");
+            if (!result) System.out.println("Элементов с таким семетром и не было :)");
             return true;
         } else return false;
     }

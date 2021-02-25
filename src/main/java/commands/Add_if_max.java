@@ -11,15 +11,15 @@ public class Add_if_max implements Command {
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args != null) {
             if (args.length != 1) return false;
-            int id;
+            int count;
             try {
-                id = Integer.parseInt(args[0]);
+                count = Integer.parseInt(args[0]);
             } catch (Exception e) {
                 System.out.println("В качестве аргумента не Integer или <0");
                 return false;
             }
 
-            if (id < 0) return false;
+            if (count < 0) return false;
             List<StudyGroup> list = commandHandler.sortGroups();
             Collections.sort(list);
 
@@ -27,14 +27,14 @@ public class Add_if_max implements Command {
                 Command cmd = commandHandler.getCommands().get("add");
                 if (cmd.execute(commandHandler, "studygroup")) {
                     list = commandHandler.sortGroups();
-                    list.get(0).setId(id);
                 } else System.out.println("Команда не выполнена, неверный аргумент(ы)");
             } else {
-                if (id > list.get(commandHandler.getGroups().size() - 1).getId()) {
+                if (count > list.get(commandHandler.getGroups().size() - 1).getStudentsCount()) {
                     Command cmd = commandHandler.getCommands().get("add");
                     if (cmd.execute(commandHandler, "studygroup")) {
                         list = commandHandler.sortGroups();
-                        list.get(commandHandler.getGroups().size() - 1).setId(id);
+                        Collections.sort(list, new StudyGroup.DateComparator());
+                        list.get(commandHandler.getGroups().size() - 1).setCount(count);
                     } else System.out.println("Команда не выполнена, неверный аргумент(ы)");
                 }
             }

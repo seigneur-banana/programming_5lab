@@ -22,11 +22,13 @@ public class Update implements Command {
                 return false;
             }
             for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); ) {
-                if (id.equals(iterator.next().getId())) {
+                StudyGroup temp = iterator.next();
+                if (id.equals(temp.getId())) {
                     iterator.remove();
                     Command cmd = commandHandler.getCommands().get("add");
                     result = cmd.execute(commandHandler, "studygroup");
                     list = commandHandler.sortGroups();
+                    Collections.sort(list, new StudyGroup.DateComparator());
                     list.get(commandHandler.getGroups().size() - 1).setId(id);
                 }
             }

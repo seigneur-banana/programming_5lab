@@ -12,12 +12,7 @@ public class Print_descending implements Command {
         if (args == null) {
             List<StudyGroup> list = commandHandler.sortGroups();
             Collections.sort(list, Collections.reverseOrder());
-
-            /* Sorted List in reverse order
-            for(StudyGroup group: list){
-                System.out.println(group);
-            }*/
-            System.out.println("Descending StudyGroup : " + list);
+            System.out.println("Descending StudyGroup :\n" + list);
             return true;
         } else return false;
     }

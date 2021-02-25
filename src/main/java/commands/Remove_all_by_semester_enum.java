@@ -10,7 +10,7 @@ public class Remove_all_by_semester_enum implements Command {
     public boolean execute(CommandHandler commandHandler, String... args) {
         boolean result = false;
         if (args != null) {
-            if (args.length != 1 || args[0] == "") return false;
+            if (args.length != 1 || args[0].equals("")) return false;
             for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); ) {
                 if (args[0].toLowerCase().equals(iterator.next().getSemesterEnum().toString().toLowerCase())) {
                     iterator.remove();

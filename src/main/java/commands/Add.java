@@ -3,9 +3,7 @@ package commands;
 import appliances.*;
 import org.json.simple.parser.ParseException;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class Add implements Command {
     @Override
@@ -75,11 +73,11 @@ public class Add implements Command {
                     Color eyeColor = null, hairColor = null;
                     Country nationality = null;
                     Location location = null;
-                    System.out.println("Чтобы добавить элемент в Person, введите такие поля, как (Обязательные поля помечены *):" +
-                            "\n1*. Имя Name (String)\n2*. Рост height (int, знач > 0)\n3. ЦветГлаз eyeColor (Color)." +
-                            "\n4. ЦветПричёски hairColor (Color).\n5. Национальность nationality (Country)\n6. Локация location (Location).");
+                    System.out.print("Чтобы добавить элемент в Person, введите такие поля, как (Обязательные поля помечены *):");
+                    System.out.print("\n1*. Name (String)\n2*.PocT Height (int, > 0)\n3. eyeColor (Color).");
+                    System.out.println("\n4. ЦветПричёски hairColor (Color).\n5. Национальность nationality (Country)\n6. Локация location (Location).");
                     do {
-                        System.out.print("Введите Имя> ");
+                        System.out.print("Введите имя>");
                         name = scanner.nextLine();
                         if (!name.equals("")) break;
                         else System.out.println("Неверный формат ввода, пожалуйста, попробуйте снова.");
@@ -257,8 +255,8 @@ public class Add implements Command {
         else return id;
     }
 
-    public static boolean addFromScript(CommandHandler commandHandler, Integer idGroup, String str, boolean choice) throws ParseException {
-        if (choice) {
+    public static boolean addFromScript(CommandHandler commandHandler, Integer idGroup, String str, int choice) throws ParseException {
+        if (choice == 1) {
             boolean match = false;
             for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); )
                 if (idGroup.equals(iterator.next().getId())) match = true;
@@ -317,6 +315,15 @@ public class Add implements Command {
                 sem,
                 commandHandler.getPersons().get(id)                                             //admin
         );
+        if (choice == 2) {
+            List<StudyGroup> list = commandHandler.sortGroups();
+            Collections.sort(list);
+            if (count > list.get(commandHandler.getGroups().size() - 1).getStudentsCount()) {
+                list = commandHandler.sortGroups();
+                Collections.sort(list, new StudyGroup.DateComparator());
+                list.get(commandHandler.getGroups().size() - 1).setCount(count);
+            }
+        }
         return true;
     }
 }

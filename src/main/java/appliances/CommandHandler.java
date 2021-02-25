@@ -85,8 +85,6 @@ public class CommandHandler {
                     history.remove();
                 }
             } catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(ERR_MSG + " in comHand catch");
             }
         } while (true);
     }

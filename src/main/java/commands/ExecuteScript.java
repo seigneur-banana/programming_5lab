@@ -27,7 +27,7 @@ public class ExecuteScript implements Command {
                     if (line.matches("\\s*add\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
                         Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
                         if (m.find()) {
-                            if (Add.addFromScript(commandHandler, Add.isItIdUnique(commandHandler, commandHandler.getGroups().size()), m.group(), false))
+                            if (Add.addFromScript(commandHandler, Add.isItIdUnique(commandHandler, commandHandler.getGroups().size()), m.group(), 0))
                                 System.out.println("Элемент добавлен");
                             continue;
                         }
@@ -36,8 +36,16 @@ public class ExecuteScript implements Command {
                         Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
                         if (m.find()) {
                             String[] columns = line.split(" ");
-                            if (Add.addFromScript(commandHandler, Integer.parseInt(columns[1]), m.group(), true))
+                            if (Add.addFromScript(commandHandler, Integer.parseInt(columns[1]), m.group(), 1))
                                 System.out.println("Элемент обновлен");
+                            continue;
+                        }
+                    }
+                    if (line.matches("\\s*add_if_max\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
+                        Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
+                        if (m.find()) {
+                            if (Add.addFromScript(commandHandler, Add.isItIdUnique(commandHandler, commandHandler.getGroups().size()), m.group(), 2))
+                                System.out.println("Элемент добавлен");
                             continue;
                         }
                     }
