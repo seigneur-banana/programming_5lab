@@ -6,7 +6,7 @@ import appliances.StudyGroup;
 import java.util.Collections;
 import java.util.List;
 
-public class Print_descending implements Command {
+public class PrintDescending implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args == null) {

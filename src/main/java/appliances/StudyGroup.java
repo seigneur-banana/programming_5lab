@@ -14,7 +14,6 @@ public class StudyGroup implements Comparable<StudyGroup> {
     private int averageMark; //Значение поля должно быть больше 0
     private Semester semesterEnum; //Поле может быть null
     private Person groupAdmin; //Поле не может быть null
-    private Date collection;
 
     StudyGroup(Integer id, String name, Coordinates coordinates, Date date, int count, int transfer, int mark, Semester sem, Person admin) {
         this.id = id;

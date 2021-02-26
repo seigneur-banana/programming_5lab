@@ -37,8 +37,8 @@ public class Add implements Command {
                 break;
 
                 case "location": {
-                    Float x;
-                    Integer y;
+                    float x;
+                    int y;
                     String name;
                     System.out.println("Чтобы добавить элемент в Location, введите такие поля, как (Обязательные поля помечены *):" +
                             "\n1*. Координата X (Float)\n2*. Координата Y (Integer)\n3. Название name (String).");
@@ -175,7 +175,7 @@ public class Add implements Command {
                     System.out.println("Доступные Coordinates: " + commandHandler.getCoordinates());
                     System.out.print("Введите id_Координат> ");
                     try {
-                        Integer idCoordinates = Integer.parseInt(scanner.nextLine());
+                        int idCoordinates = Integer.parseInt(scanner.nextLine());
                         if (idCoordinates < commandHandler.getCoordinates().size() && idCoordinates >= 0)
                             coordinates = commandHandler.getCoordinates().get(idCoordinates);
                     } catch (Exception e) {
@@ -269,30 +269,35 @@ public class Add implements Command {
                     iterator.remove();
         }
         ArrayList<String> ar = FileParser.parseJSON(str);
-        Double corY = 0.0, corX = 0.0;
+        double corY = 0.0, corX = 0.0;
         int count = 0, transfer = 0, mark = 0, id = 0;
         Semester sem = null;
         String name = ar.get(0);
         try {
             corY = Double.parseDouble(ar.get(1));
         } catch (Exception e) {
+            System.out.println("Ошибка при чтении координаты Y");
         }
         try {
             corX = Double.parseDouble(ar.get(2));
         } catch (Exception e) {
+            System.out.println("Ошибка при чтении координаты X");
         }
         try {
             if (Integer.parseInt(ar.get(3)) > 0) count = Integer.parseInt(ar.get(3));
         } catch (Exception e) {
+            System.out.println("Ошибка при чтении кол-ва студентов");
         }
         try {
             if (Integer.parseInt(ar.get(4)) > 0) transfer = Integer.parseInt(ar.get(4));
         } catch (Exception e) {
+            System.out.println("Ошибка при чтении кол-ва переведенных сутудентов");
         }
         try {
             if (Integer.parseInt(ar.get(5)) > 0 && Integer.parseInt(ar.get(5)) <= 5)
                 mark = Integer.parseInt(ar.get(5));
         } catch (Exception e) {
+            System.out.println("Ошибка при чтении ср. оценки");
         }
         for (Semester semester : Semester.values()) {
             if (ar.get(6).toLowerCase().equals(semester.name().toLowerCase())) {
@@ -303,6 +308,7 @@ public class Add implements Command {
         try {
             if (Integer.parseInt(ar.get(7)) > 0) id = Integer.parseInt(ar.get(7));
         } catch (Exception e) {
+            System.out.println("Ошибка при чтении id админа");
         }
         commandHandler.setCoordinates(corY, corX);
         commandHandler.setGroups(

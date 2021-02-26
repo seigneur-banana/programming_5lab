@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 
 public class FileParser {
-    public void read(CommandHandler commandHandler) throws IOException {
+    public void read(CommandHandler commandHandler){
         // маппинг csv
         //String[] mapping = new String[]{"groupName", "coorX", "coorY", "count", "transfer", "mark", "sem", "admin",
         //        "height", "eye", "hair", "country", "locX", "locY", "locName"};
@@ -20,29 +20,34 @@ public class FileParser {
             int i;
             StringBuilder s = new StringBuilder();
             while ((i = bufferedInputStream.read()) != -1) {
+                try{
                 s.append((char) i);
                 if ((char) i == '\n') {
                     String[] columns = s.toString().split(",");
                     Semester sem = null;
                     Color eye = null, hair = null;
                     Country country = null;
-                    Integer height = 0, count = 0, transfer = 0, mark = 0;
+                    int height = 0, count = 0, transfer = 0, mark = 0;
                     try {
                         if (Integer.parseInt(columns[8]) > 0) height = Integer.parseInt(columns[8]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении роста");
                     }
                     try {
                         if (Integer.parseInt(columns[3]) > 0) count = Integer.parseInt(columns[3]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении кол-ва студентов");
                     }
                     try {
                         if (Integer.parseInt(columns[4]) > 0) transfer = Integer.parseInt(columns[4]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении кол-ва перевед-х студентов");
                     }
                     try {
                         if (Integer.parseInt(columns[5]) > 0 && Integer.parseInt(columns[5]) <= 5)
                             mark = Integer.parseInt(columns[5]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении ср. оценки");
                     }
                     for (Semester semester : Semester.values()) {
                         if (columns[6].toLowerCase().equals(semester.name().toLowerCase())) {
@@ -68,25 +73,30 @@ public class FileParser {
                             break;
                         }
                     }
-                    Double corY = 0.0, corX = 0.0;
-                    Integer locY = 0;
-                    Float locX = 0.0f;
+                    double corY = 0.0, corX = 0.0;
+                    int locY = 0;
+                    float locX = 0.0f;
                     try {
                         corY = Double.parseDouble(columns[2]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении координаты Y");
                     }
                     try {
                         corX = Double.parseDouble(columns[1]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении координаты Х");
                     }
                     try {
                         locY = Integer.parseInt(columns[13]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении локации Y");
                     }
                     try {
                         locX = Float.parseFloat(columns[12]);
                     } catch (Exception e) {
+                        System.out.println("Ошибка при чтении координаты X");
                     }
+
                     commandHandler.setCoordinates(corY, corX); //y,x
                     commandHandler.setLocations(locY, locX, columns[14]);//y,x,locName
                     commandHandler.setPersons(
@@ -109,6 +119,9 @@ public class FileParser {
                             commandHandler.getPersons().get(commandHandler.getPersons().size() - 1)         //admin
                     );
                     s.setLength(0);
+                }
+                }catch (Exception e){
+                    System.out.println("Ошибка чтения");
                 }
             }
             System.out.println("Данные подгружены из базы данных . . .");

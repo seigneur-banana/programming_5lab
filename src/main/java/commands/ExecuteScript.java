@@ -24,7 +24,7 @@ public class ExecuteScript implements Command {
                     line = reader.readLine();
                     if (line == null) break;
 
-                    if (line.matches("\\s*add\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
+                    if (line.matches("\\s*add\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *}")) {
                         Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
                         if (m.find()) {
                             if (Add.addFromScript(commandHandler, Add.isItIdUnique(commandHandler, commandHandler.getGroups().size()), m.group(), 0))
@@ -32,7 +32,7 @@ public class ExecuteScript implements Command {
                             continue;
                         }
                     }
-                    if (line.matches("\\s*update\\s+\\d\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
+                    if (line.matches("\\s*update\\s+\\d\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *}")) {
                         Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
                         if (m.find()) {
                             String[] columns = line.split(" ");
@@ -41,7 +41,7 @@ public class ExecuteScript implements Command {
                             continue;
                         }
                     }
-                    if (line.matches("\\s*add_if_max\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *\\}")) {
+                    if (line.matches("\\s*add_if_max\\s+\\{ *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"( *, *\"[^\"\\r\\n]*\" *: *\"[^\"\\r\\n]*\"){7} *}")) {
                         Matcher m = Pattern.compile("\\{\\s*[^{}]+\\s*}").matcher(line);
                         if (m.find()) {
                             if (Add.addFromScript(commandHandler, Add.isItIdUnique(commandHandler, commandHandler.getGroups().size()), m.group(), 2))

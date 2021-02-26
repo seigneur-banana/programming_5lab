@@ -5,7 +5,7 @@ import appliances.StudyGroup;
 
 import java.util.Iterator;
 
-public class Remove_all_by_semester_enum implements Command {
+public class RemoveAllBySemesterEnum implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         boolean result = false;

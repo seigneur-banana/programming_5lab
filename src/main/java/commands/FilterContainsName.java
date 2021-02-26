@@ -5,11 +5,11 @@ import appliances.StudyGroup;
 
 import java.util.Iterator;
 
-public class Filter_contains_name implements Command {
+public class FilterContainsName implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args != null) {
-            if (args.length != 1 || args[0] == "") return false;
+            if (args.length != 1 || args[0].equals("")) return false;
             boolean result = false;
 
             for (Iterator<StudyGroup> iterator = commandHandler.getGroups().iterator(); iterator.hasNext(); ) {

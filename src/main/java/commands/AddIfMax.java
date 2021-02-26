@@ -6,7 +6,7 @@ import appliances.StudyGroup;
 import java.util.Collections;
 import java.util.List;
 
-public class Add_if_max implements Command {
+public class AddIfMax implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args != null) {
@@ -26,7 +26,7 @@ public class Add_if_max implements Command {
             if (commandHandler.getGroups().size() == 0) {
                 Command cmd = commandHandler.getCommands().get("add");
                 if (cmd.execute(commandHandler, "studygroup")) {
-                    list = commandHandler.sortGroups();
+                    System.out.println("Добавлен элемнт");
                 } else System.out.println("Команда не выполнена, неверный аргумент(ы)");
             } else {
                 if (count > list.get(commandHandler.getGroups().size() - 1).getStudentsCount()) {
@@ -38,8 +38,8 @@ public class Add_if_max implements Command {
                     } else System.out.println("Команда не выполнена, неверный аргумент(ы)");
                 }
             }
-            return true;
-        } else return true;
+        }
+        return true;
     }
 
     @Override

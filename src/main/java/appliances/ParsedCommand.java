@@ -5,7 +5,7 @@ public class ParsedCommand {
     private String[] args;
 
     public ParsedCommand(String line) {
-        String parts[] = line.split(" ");
+        String[] parts = line.split(" ");
         command = parts[0];
         if (parts.length > 1) {
             args = new String[parts.length - 1];

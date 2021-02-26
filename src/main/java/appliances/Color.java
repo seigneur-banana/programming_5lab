@@ -10,7 +10,6 @@ public enum Color {
     private int value;
 
     Color(int i) {
-        this.value = value;
     }
 
     public int getValue() {

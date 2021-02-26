@@ -5,7 +5,7 @@ import appliances.StudyGroup;
 
 import java.util.Iterator;
 
-public class Remove_by_id implements Command {
+public class RemoveById implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args != null) {

@@ -13,7 +13,7 @@ public class Update implements Command {
 
             Integer id;
             boolean result = false;
-            List<StudyGroup> list = commandHandler.sortGroups();
+            List<StudyGroup> list;
             try {
                 id = Integer.parseInt(args[0]);
                 if (id < 0) return false;

@@ -5,7 +5,7 @@ import appliances.StudyGroup;
 
 import java.util.Iterator;
 
-public class Remove_greater implements Command {
+public class RemoveGreater implements Command {
     @Override
     public boolean execute(CommandHandler commandHandler, String... args) {
         if (args != null) {

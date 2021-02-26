@@ -10,13 +10,13 @@ public class CommandHandler {
     private Queue<String> history = new LinkedList<>();
     private Map<String, Command> commands = new HashMap<>();
     private Map<Integer, Location> locations = new HashMap<>();
-    ;
+
     private Map<Integer, Coordinates> coordinates = new HashMap<>();
     private Map<Integer, Person> persons = new HashMap<>();
     private Set<StudyGroup> groups = new LinkedHashSet<>();
     private Date time = new Date();
 
-    public CommandHandler() {
+    {
         Command cmd = new History();
         commands.put(cmd.getName(), cmd);
         cmd = new Help();
@@ -35,58 +35,62 @@ public class CommandHandler {
         commands.put(cmd.getName(), cmd);
         cmd = new Clear();
         commands.put(cmd.getName(), cmd);
-        cmd = new Add_if_max();
+        cmd = new AddIfMax();
         commands.put(cmd.getName(), cmd);
-        cmd = new Remove_by_id();
+        cmd = new RemoveById();
         commands.put(cmd.getName(), cmd);
-        cmd = new Filter_contains_name();
+        cmd = new FilterContainsName();
         commands.put(cmd.getName(), cmd);
-        cmd = new Print_descending();
+        cmd = new PrintDescending();
         commands.put(cmd.getName(), cmd);
-        cmd = new Remove_all_by_semester_enum();
+        cmd = new RemoveAllBySemesterEnum();
         commands.put(cmd.getName(), cmd);
-        cmd = new Remove_greater();
+        cmd = new RemoveGreater();
         commands.put(cmd.getName(), cmd);
         cmd = new Update();
         commands.put(cmd.getName(), cmd);
+    }
+
+    public CommandHandler() {
         FileParser io = new FileParser();
         try {
             io.read(this);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     public void execute() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Приветствие!!! @Допиши сюда что-то хорошее@ ");
-        do {
-            try {
-                System.out.print("> ");
-                String str = scanner.nextLine();
+            while (true) {
+                try {
+                    System.out.print("> ");
+                    String str = scanner.nextLine();
 
-                ParsedCommand pc = new ParsedCommand(str);
-                if (pc.getCommand() == null || "".equals(pc.getCommand())) {
-                    continue;
-                }
-                Command cmd = commands.get(pc.getCommand().toLowerCase());
+                    ParsedCommand pc = new ParsedCommand(str);
+                    if (pc.getCommand() == null || "".equals(pc.getCommand())) {
+                        continue;
+                    }
+                    Command cmd = commands.get(pc.getCommand().toLowerCase());
 
-                if (cmd == null) {
-                    System.out.println("Команда не распознана, список команд => help");
-                    continue;
-                }
-                if (!cmd.execute(this, pc.getArgs())) {
-                    System.out.println("Команда не выполнена, неверный аргумент(ы)");
-                }
+                    if (cmd == null) {
+                        System.out.println("Команда не распознана, список команд => help");
+                        continue;
+                    }
+                    if (!cmd.execute(this, pc.getArgs())) {
+                        System.out.println("Команда не выполнена, неверный аргумент(ы)");
+                    }
 
-                history.add(str);
-                if (history.size() == 9) {
-                    history.remove();
+                    history.add(str);
+                    if (history.size() == 9) {
+                        history.remove();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Ошибка вызовы функции");
+                    break;
                 }
-            } catch (Exception e) {
             }
-        } while (true);
     }
 
     public Map<String, Command> getCommands() {
@@ -132,7 +136,7 @@ public class CommandHandler {
     }
 
     public void setCoordinates(Double y, double x) {
-        Coordinates tmp = new Coordinates(x, y);
+        Coordinates tmp = new Coordinates(y, x);
         coordinates.put(coordinates.size(), tmp);
     }
 
